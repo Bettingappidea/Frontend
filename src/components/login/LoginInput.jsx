@@ -47,7 +47,7 @@ class LoginPage extends React.Component {
     this.setState({ email: "", password: "", username: "" });
   };
 
-  async handleSignIn() {
+  handleSignIn = async function () {
     if (
       this.state.email === "" ||
       this.state.username === "" ||
@@ -71,12 +71,10 @@ class LoginPage extends React.Component {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
-  async handleLogin() {
+  handleLogin = async function () {
     if (this.state.email === "" || this.state.password === "") {
-      console.log("idhar aa rha he");
-      console.log(this.state);
       return alert("Please enter all necessary info");
     }
     try {
@@ -95,7 +93,7 @@ class LoginPage extends React.Component {
       loginError.innerHTML = "Incorrect email/password combination";
       console.log(err);
     }
-  }
+  };
   setName = function (e) {
     const regNameAvail = document.getElementById("regNameAvail");
     if (e.target.value.split(" ").length > 1) {
@@ -154,7 +152,7 @@ class LoginPage extends React.Component {
         <div className="inputLogin">
           <div className="container" id="container">
             <div className="form-container sign-up-container">
-              <form action="#">
+              <form>
                 <h1>Create Account</h1>
                 <br></br>
                 <input
