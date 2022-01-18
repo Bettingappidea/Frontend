@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import "./LoginInput.css";
-import LoginNavbar from "./LoginNavbar";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -86,8 +85,8 @@ class LoginPage extends React.Component {
         }
       );
       if (!data) return alert("No token recieved");
-      alert(`You have Loged in succesfully as ${this.state.email}`);
       window.localStorage.setItem("jwt_token", data.jwt_token);
+      this.props.history.push("/home");
     } catch (err) {
       const loginError = document.getElementById("loginError");
       loginError.innerHTML = "Incorrect email/password combination";
@@ -148,7 +147,6 @@ class LoginPage extends React.Component {
   render() {
     return (
       <div>
-        <LoginNavbar className="LoginNavbar" />
         <div className="inputLogin">
           <div className="container" id="container">
             <div className="form-container sign-up-container">

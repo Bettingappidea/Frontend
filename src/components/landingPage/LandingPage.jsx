@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import LPNavbar from "./LandingPageNavbar";
 
 class LandingPage extends React.Component {
   render() {
+    let styleLandingPage = {
+      // paddingTop: "10vh",
+      height: "100vh",
+      width: "100%",
+      background: "black",
+      alignItems: "center",
+      display: "flex",
+      justifyContent: "center",
+    };
     return (
-      <div>
-        <h1>Landing Page</h1>
-        <LPNavbar />
-        <Link to="/login">Login</Link>
+      <div style={styleLandingPage}>
+        <h1 style={{ fontSize: "50vh", color: "sandybrown" }}>Gazebo!</h1>
       </div>
     );
   }
