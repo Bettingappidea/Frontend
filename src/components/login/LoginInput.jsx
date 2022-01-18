@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./LoginInput.css";
 import LoginNavbar from "./LoginNavbar";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
