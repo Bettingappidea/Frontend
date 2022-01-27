@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #dddddd;
+  background-color: #ffffff;
 }
 
 .inputLogin body {
@@ -200,7 +200,7 @@
 }
 
 .inputLogin .overlay-left {
-  left: -6vh;
+  left: 0;
   transform: translateX(-20%);
 }
 
@@ -209,7 +209,7 @@
 }
 
 .inputLogin .overlay-right {
-  right: -6vh;
+  right: 0;
   transform: translateX(0);
 }
 

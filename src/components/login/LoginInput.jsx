@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./LoginInput.css";
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -46,7 +47,7 @@ class LoginPage extends React.Component {
     this.setState({ email: "", password: "", username: "" });
   };
 
-  handleSignIn = async function () {
+  async handleSignIn() {
     if (
       this.state.email === "" ||
       this.state.username === "" ||
@@ -70,13 +71,14 @@ class LoginPage extends React.Component {
     } catch (err) {
       console.log(err);
     }
-  };
+  }
 
-  handleLogin = async function () {
+  async handleLogin() {
     if (this.state.email === "" || this.state.password === "") {
       return alert("Please enter all necessary info");
     }
     try {
+      console.log(this.state);
       const { data: data } = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/users/login`,
         {
@@ -86,13 +88,12 @@ class LoginPage extends React.Component {
       );
       if (!data) return alert("No token recieved");
       window.localStorage.setItem("jwt_token", data.jwt_token);
-      this.props.history.push("/home");
+      alert("logged in successfully");
     } catch (err) {
       const loginError = document.getElementById("loginError");
       loginError.innerHTML = "Incorrect email/password combination";
-      console.log(err);
     }
-  };
+  }
   setName = function (e) {
     const regNameAvail = document.getElementById("regNameAvail");
     if (e.target.value.split(" ").length > 1) {

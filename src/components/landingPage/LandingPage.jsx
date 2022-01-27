@@ -7,7 +7,7 @@ class LandingPage extends React.Component {
       // paddingTop: "10vh",
       height: "100vh",
       width: "100%",
-      background: "black",
+      background: "white",
       alignItems: "center",
       display: "flex",
       justifyContent: "center",

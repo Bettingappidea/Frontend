@@ -5,9 +5,10 @@ import "./navbar.css";
 const Navbar = () => {
   const [click, setClicker] = useState(false);
   const [button, setButton] = useState(true);
-  const token = localStorage.getItem("jwt_string");
-  const [details, setDetails] = useState({ name: "", email: "" });
 
+  const [details, setDetails] = useState({ name: "", email: "" });
+  const [loggedin, setLoggedIn] = useState(false);
+  const [jwttoken, setjwttoken] = useState(null);
   const showButton = () => {
     if (window.innerWidth <= 960) {
       setButton(false);
@@ -15,28 +16,55 @@ const Navbar = () => {
       setButton(true);
     }
   };
-
-  useEffect(async () => {
-    console.log("abhi login dabaya or yeh idhar aya");
-    console.log(token);
+  useEffect(() => {
+    const token = localStorage.getItem("jwt_token");
     if (token) {
+      setjwttoken(token);
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, []);
+  useEffect(async () => {
+    if (jwttoken) {
       try {
-        axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+        console.log("idhar");
+        axios.defaults.headers.common.Authorization = `Bearer ${jwttoken}`;
         const { data: data } = await axios.get(
           `${process.env.REACT_APP_SERVER_URL}/users/details`
         );
+        console.log(data);
         setDetails({ name: data.username, email: data.email });
+        setLoggedIn(true);
       } catch (err) {
         console.log(err);
       }
     }
-  }, []);
+  }, [jwttoken]);
 
   useEffect(() => {
     showButton();
   }, []);
   window.addEventListener("resize", showButton);
   const closeMobileMenu = () => setClicker(false);
+  let login_logout;
+  if (loggedin) {
+    login_logout = (
+      <li className="nav-item">
+        <Link to="/account" className="nav-links" onClick={closeMobileMenu}>
+          {details.name}
+        </Link>
+      </li>
+    );
+  } else {
+    login_logout = (
+      <li>
+        <Link to="/login" className="nav-links" onClick={closeMobileMenu}>
+          Login
+        </Link>
+      </li>
+    );
+  }
   return (
     <>
       <nav className="navbar">
@@ -58,35 +86,12 @@ const Navbar = () => {
                 Bet
               </Link>
             </li>
-
             <li className="nav-item">
               <Link to="/yo" className="nav-links" onClick={closeMobileMenu}>
                 Become a Bookie
               </Link>
             </li>
-            {token && (
-              <li className="nav-item">
-                <Link
-                  to="/Account"
-                  className="nav-links"
-                  onClick={closeMobileMenu}
-                >
-                  {details.username}
-                </Link>
-              </li>
-            )}
-            {!token && (
-              <li className="nav-item">
-                <Link
-                  to="/login"
-                  className="nav-links"
-                  onClick={closeMobileMenu}
-                >
-                  Login
-                </Link>
-              </li>
-            )}
-
+            {login_logout}
             {/* <li>
               <Link
                 to="/login"

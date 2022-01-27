@@ -1,4 +1,4 @@
-import LoginPage from "./components/login/LoginInput";
+import LoginPage from "./components/login/LoginInput2";
 import LandingPage from "./components/landingPage/LandingPage";
 import Footer from "./components/footer/footer";
 import "./App.css";
@@ -8,8 +8,10 @@ import {
   Route,
   Fragment,
   Redirect,
+  Navigate,
 } from "react-router-dom";
 import Navbar from "./components/navbar/navbar";
+import Account from "./components/account/Account";
 function App() {
   return (
     <>
@@ -17,7 +19,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
-          <Route exact path="/home" Redirect to="/" />
+          <Route exact path="/home" element={<Navigate replace to="/" />} />
+          <Route exact path="/account" element={<Account />} />
           <Route exact path="/login" element={<LoginPage />} />
         </Routes>
         <Footer />
