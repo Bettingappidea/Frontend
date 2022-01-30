@@ -1,7 +1,9 @@
 import React, { Component, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import axios from "axios";
 import "./navbar.css";
+// const functions = require("firebase-functions");
 const Navbar = () => {
   const [click, setClicker] = useState(false);
   const [button, setButton] = useState(true);
@@ -29,9 +31,15 @@ const Navbar = () => {
     if (jwttoken) {
       try {
         console.log("idhar");
+        // let localenvironment;
+        // if (Object.keys(functions.config()) > 0) {
+        //   localenvironment = functions.config().service;
+        // }else{
+        //   localenvironment
+        // }
         axios.defaults.headers.common.Authorization = `Bearer ${jwttoken}`;
         const { data: data } = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/users/details`
+          `https://gazeboapi.herokuapp.com/users/details`
         );
         console.log(data);
         setDetails({ name: data.username, email: data.email });

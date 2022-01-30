@@ -15,10 +15,10 @@ const LoginPage = () => {
     async function temp() {
       try {
         const { data: usernames } = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/users/usernames`
+          `https://gazeboapi.herokuapp.com/users/usernames`
         );
         const { data: emails } = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/users/emails`
+          `https://gazeboapi.herokuapp.com/users/emails`
         );
         setall_user(usernames);
         setall_emails(emails);
@@ -57,7 +57,7 @@ const LoginPage = () => {
       return alert("Please enter all necessary info");
     try {
       const { data: data } = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/users/register`,
+        `https://gazeboapi.herokuapp.com/users/register`,
         {
           email: email,
           username: username,
@@ -84,7 +84,7 @@ const LoginPage = () => {
     try {
       loginError.innerHTML = "";
       const { data: data } = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/users/login`,
+        `https://gazeboapi.herokuapp.com/users/login`,
         {
           email: email,
           password: password,
